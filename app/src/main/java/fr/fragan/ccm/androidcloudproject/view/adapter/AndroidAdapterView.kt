@@ -117,8 +117,10 @@ class AndroidVersionViewHolder(
         ui = PhoneDataSample
         binding.phoneItemLabel.text = PhoneDataSample.label
         binding.phoneItemPrice.text = PhoneDataSample.price.toString().plus(" €")
-        Glide.with(itemView.context).load(PhoneDataSample.image)
-            .placeholder(R.drawable.ic_launcher_background).into(binding.phoneItemImage)
+        Glide.with(itemView.context)
+            .load(PhoneDataSample.image)
+            .placeholder(R.drawable.ic_launcher_background)
+            .into(binding.phoneItemImage)
     }
 }
 
@@ -137,7 +139,7 @@ class AndroidVersionFooterViewHolder(
     fun bind(objectDataFooterSample: PhoneDataFooterSample) {
         binding.phoneItemFooterLabel.text = objectDataFooterSample.label
         binding.phoneItemFooterCount.text =
-            objectDataFooterSample.count.toString().plus(" Produits dans cette catégorie")
+            objectDataFooterSample.count.toString().plus(" Produits")
     }
 }
 

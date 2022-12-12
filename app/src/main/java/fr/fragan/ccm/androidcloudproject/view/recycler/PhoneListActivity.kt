@@ -46,7 +46,7 @@ class PhoneListActivity : AppCompatActivity() {
             PhoneDataSample(
                 "Iphone 6",
                 100.0,
-                "https://assets.stickpng.com/images/580b57fcd9996e24bc43c516.png",
+                "https://logos-marques.com/wp-content/uploads/2021/03/logo-Apple.jpg",
                 "Apple"
             ),
             PhoneDataSample(
