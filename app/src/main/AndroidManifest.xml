@@ -25,7 +25,7 @@
         </activity>
 
         <activity
-            android:name=".view.recycler.PhoneListActivity"
+            android:name=".view.recycler.FilmListActivity"
             android:parentActivityName=".view.MainActivity" />
 
     </application>

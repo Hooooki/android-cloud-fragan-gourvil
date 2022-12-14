@@ -1,5 +1,6 @@
 package fr.fragan.ccm.androidcloudproject.view.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,12 +9,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import fr.fragan.ccm.androidcloudproject.R
-import fr.fragan.ccm.androidcloudproject.databinding.PhoneListItemFooterRecyclerBinding
-import fr.fragan.ccm.androidcloudproject.databinding.PhoneListItemHeaderRecyclerBinding
-import fr.fragan.ccm.androidcloudproject.model.PhoneDataSample
-import fr.fragan.ccm.androidcloudproject.databinding.PhoneListItemRecyclerBinding
-import fr.fragan.ccm.androidcloudproject.model.PhoneDataFooterSample
-import fr.fragan.ccm.androidcloudproject.model.PhoneDataHeaderSample
+import fr.fragan.ccm.androidcloudproject.databinding.FilmListItemFooterRecyclerBinding
+import fr.fragan.ccm.androidcloudproject.databinding.FilmListItemHeaderRecyclerBinding
+import fr.fragan.ccm.androidcloudproject.model.FilmDataSample
+import fr.fragan.ccm.androidcloudproject.databinding.FilmListItemRecyclerBinding
+import fr.fragan.ccm.androidcloudproject.model.FilmDataFooterSample
+import fr.fragan.ccm.androidcloudproject.model.FilmDataHeaderSample
 import fr.fragan.ccm.androidcloudproject.model.SealedRecyclerViewItem
 
 private val diffItemUtils = object : DiffUtil.ItemCallback<SealedRecyclerViewItem>() {
@@ -34,7 +35,7 @@ private val diffItemUtils = object : DiffUtil.ItemCallback<SealedRecyclerViewIte
 }
 
 class AndroidVersionAdapter(
-    private val onItemClick: (quoteUi: PhoneDataSample, view: View) -> Unit,
+    private val onItemClick: (quoteUi: FilmDataSample, view: View) -> Unit,
 ) :
     ListAdapter<SealedRecyclerViewItem, RecyclerView.ViewHolder>(diffItemUtils) {
 
@@ -43,7 +44,7 @@ class AndroidVersionAdapter(
         when (viewType) {
             MyItemType.ROW.type -> {
                 AndroidVersionViewHolder(
-                    PhoneListItemRecyclerBinding.inflate(
+                    FilmListItemRecyclerBinding.inflate(
                         LayoutInflater.from(
                             parent.context
                         ), parent, false
@@ -53,7 +54,7 @@ class AndroidVersionAdapter(
             }
             MyItemType.FOOTER.type -> {
                 AndroidVersionFooterViewHolder(
-                    PhoneListItemFooterRecyclerBinding.inflate(
+                    FilmListItemFooterRecyclerBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
@@ -62,7 +63,7 @@ class AndroidVersionAdapter(
             }
             MyItemType.HEADER.type -> {
                 AndroidVersionHeaderViewHolder(
-                    PhoneListItemHeaderRecyclerBinding.inflate(
+                    FilmListItemHeaderRecyclerBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
@@ -75,16 +76,16 @@ class AndroidVersionAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder.itemViewType) {
-            MyItemType.ROW.type -> (holder as AndroidVersionViewHolder).bind(getItem(position) as PhoneDataSample)
+            MyItemType.ROW.type -> (holder as AndroidVersionViewHolder).bind(getItem(position) as FilmDataSample)
             MyItemType.HEADER.type -> (holder as AndroidVersionHeaderViewHolder).bind(
                 getItem(
                     position
-                ) as PhoneDataHeaderSample
+                ) as FilmDataHeaderSample
             )
             MyItemType.FOOTER.type -> (holder as AndroidVersionFooterViewHolder).bind(
                 getItem(
                     position
-                ) as PhoneDataFooterSample
+                ) as FilmDataFooterSample
             )
             else -> throw RuntimeException("Wrong view type received ${holder.itemView}")
         }
@@ -92,20 +93,20 @@ class AndroidVersionAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
-            is PhoneDataSample -> MyItemType.ROW.type
-            is PhoneDataHeaderSample -> MyItemType.HEADER.type
-            is PhoneDataFooterSample -> MyItemType.FOOTER.type
+            is FilmDataSample -> MyItemType.ROW.type
+            is FilmDataHeaderSample -> MyItemType.HEADER.type
+            is FilmDataFooterSample -> MyItemType.FOOTER.type
         }
     }
 
 }
 
 class AndroidVersionViewHolder(
-    private val binding: PhoneListItemRecyclerBinding,
-    onItemClick: (phoneDataSample: PhoneDataSample, view: View) -> Unit
+    private val binding: FilmListItemRecyclerBinding,
+    onItemClick: (FilmDataSample: FilmDataSample, view: View) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    private lateinit var ui: PhoneDataSample
+    private lateinit var ui: FilmDataSample
 
     init {
         binding.root.setOnClickListener {
@@ -113,33 +114,36 @@ class AndroidVersionViewHolder(
         }
     }
 
-    fun bind(PhoneDataSample: PhoneDataSample) {
-        ui = PhoneDataSample
-        binding.phoneItemLabel.text = PhoneDataSample.label
-        binding.phoneItemPrice.text = PhoneDataSample.price.toString().plus(" €")
+    fun bind(FilmDataSample: FilmDataSample) {
+        ui = FilmDataSample
+        binding.filmItemLabel.text = FilmDataSample.title
+        binding.filmItemVoteCount.text = FilmDataSample.voteCount.toString().plus(" Votes")
+        binding.filmItemOverview.text = FilmDataSample.overview
+        binding.filmRating.rating = (FilmDataSample.voteAverage / 2).toFloat()
+
         Glide.with(itemView.context)
-            .load(PhoneDataSample.image)
+            .load("https://image.tmdb.org/t/p/w500".plus(FilmDataSample.poster))
             .placeholder(R.drawable.ic_launcher_background)
-            .into(binding.phoneItemImage)
+            .into(binding.filmItemImage)
     }
 }
 
 class AndroidVersionHeaderViewHolder(
-    private val binding: PhoneListItemHeaderRecyclerBinding
+    private val binding: FilmListItemHeaderRecyclerBinding
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(objectDataHeaderSample: PhoneDataHeaderSample) {
-        binding.phoneItemHeader.text = objectDataHeaderSample.label
+    fun bind(objectDataHeaderSample: FilmDataHeaderSample) {
+        binding.filmItemHeader.text = objectDataHeaderSample.label
     }
 
 }
 
 class AndroidVersionFooterViewHolder(
-    private val binding: PhoneListItemFooterRecyclerBinding
+    private val binding: FilmListItemFooterRecyclerBinding
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(objectDataFooterSample: PhoneDataFooterSample) {
-        binding.phoneItemFooterLabel.text = objectDataFooterSample.label
-        binding.phoneItemFooterCount.text =
-            objectDataFooterSample.count.toString().plus(" Produits")
+    fun bind(objectDataFooterSample: FilmDataFooterSample) {
+        binding.filmItemFooterLabel.text = objectDataFooterSample.label
+        binding.filmItemFooterCount.text =
+            objectDataFooterSample.count.toString().plus(" Films")
     }
 }
 

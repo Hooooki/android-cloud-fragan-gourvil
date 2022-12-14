@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import fr.fragan.ccm.androidcloudproject.databinding.ActivityMainBinding
-import fr.fragan.ccm.androidcloudproject.view.recycler.PhoneListActivity
+import fr.fragan.ccm.androidcloudproject.view.recycler.FilmListActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goToRecyclerView() {
-        startActivity(Intent(this, PhoneListActivity::class.java))
+        startActivity(Intent(this, FilmListActivity::class.java))
     }
 
 }

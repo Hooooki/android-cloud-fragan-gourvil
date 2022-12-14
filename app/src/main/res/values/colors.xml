@@ -7,5 +7,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="background_item">@android:color/white</color>
+    <color name="light_gray">#9A8C89</color>
+    <color name="dusk_yellow">#F4C358</color>
 </resources>

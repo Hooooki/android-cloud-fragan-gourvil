@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/phoneItemHeader"
+        android:id="@+id/filmItemHeader"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
