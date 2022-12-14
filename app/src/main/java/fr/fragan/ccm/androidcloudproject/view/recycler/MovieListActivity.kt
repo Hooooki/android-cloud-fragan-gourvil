@@ -61,7 +61,7 @@ class MovieListActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        viewModel.movieList.observe(this, androidVersionListObserver)
+        viewModel.movieList.removeObserver(androidVersionListObserver)
     }
 
     private fun onItemClick(movieDataSample: MovieDataSample, view : View) {
