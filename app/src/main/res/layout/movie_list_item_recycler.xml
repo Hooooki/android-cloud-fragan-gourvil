@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/movieItemImage"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:contentDescription="Icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="7:9"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toEndOf="@id/movieItemImage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0"
+            >
+
+            <TextView
+                android:id="@+id/movieItemLabel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Movie title"
+                android:textSize="21dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/movieItemVoteCount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/movieItemLabel"
+                android:text="Movie title"
+                android:textSize="15dp"
+                android:textStyle="italic" />
+
+            <RatingBar
+                android:id="@+id/movieRating"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:scaleX=".5"
+                android:scaleY=".5"
+                android:transformPivotX="0dp"
+                android:transformPivotY="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/movieItemVoteCount"
+                android:theme="@style/RatingBar" />
+
+            <TextView
+                android:id="@+id/movieItemOverview"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/movieRating"
+                android:paddingBottom="10dp"
+                android:text="Movie title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
